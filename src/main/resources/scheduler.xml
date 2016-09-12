@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+	<context:property-placeholder location="classpath*:scheduler.properties"
+		ignore-unresolvable="true" />
+
+	<bean name="recon0003Job"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.buybal.setliq.scheduler.job.Recon0003Job" />
+		<property name="durability" value="true"></property>
+	</bean>
+
+	<bean id="recon0003Trigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="recon0003Job" />
+		<property name="startDelay" value="${recon0003Trigger_startDelay}" />
+		<property name="cronExpression" value="${recon0003Trigger_cronExpression}" />
+	</bean>
+
+	<bean name="recon2002Job"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.buybal.setliq.scheduler.job.Recon2002Job" />
+		<property name="durability" value="true"></property>
+	</bean>
+
+	<bean id="recon2002Trigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="recon2002Job" />
+		<property name="startDelay" value="${recon2002Trigger_startDelay}" />
+		<property name="cronExpression" value="${recon2002Trigger_cronExpression}" />
+	</bean>
+			<bean name="recon0015Job"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.buybal.setliq.scheduler.job.Recon0015Job" />
+		<property name="durability" value="true"></property>
+	</bean>
+
+	<bean id="recon0015Trigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="recon0015Job" />
+		<property name="startDelay" value="${recon0015Trigger_startDelay}" />
+		<property name="cronExpression" value="${recon0015Trigger_cronExpression}" />
+	</bean>
+		<bean name="recon0019Job"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.buybal.setliq.scheduler.job.Recon0019Job" />
+		<property name="durability" value="true"></property>
+	</bean>
+
+	<bean id="recon0019Trigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="recon0019Job" />
+		<property name="startDelay" value="${recon0019Trigger_startDelay}" />
+		<property name="cronExpression" value="${recon0019Trigger_cronExpression}" />
+	</bean>
+
+	<bean name="umpayReconJob"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass"
+			value="com.buybal.setliq.scheduler.job.UmpayReconJob" />
+		<property name="durability" value="true"></property>
+	</bean>
+
+	<bean id="umpayReconTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="umpayReconJob" />
+		<property name="startDelay" value="${umpayReconTrigger_startDelay}" />
+		<property name="cronExpression" value="${umpayReconTrigger_cronExpression}" />
+	</bean>
+
+	<bean id="schedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+<!-- 			
+				<ref bean="recon0003Trigger" />
+				<ref bean="recon2002Trigger" />
+				<ref bean="recon0015Trigger" />
+				<ref bean="recon0019Trigger" />
+-->
+				<ref bean="umpayReconTrigger" />
+ 				
+			</list>
+		</property>
+	</bean>
+</beans>
